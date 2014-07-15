@@ -1,0 +1,23 @@
+<!-- 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapp.MainActivity"
+    tools:ignore="MergeRootFrame" />
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:text="Draw Random Circle" android:onClick="onClick_DrawRandomCircle"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:text="Clear" android:onClick="onClick_Clear"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:text="open act1" android:onClick="onClick_OpenAct1"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:text="open act2" android:onClick="onClick_OpenAct2"/>
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+        android:text="open act3" android:onClick="onClick_OpenAct3"/>
+</LinearLayout>
