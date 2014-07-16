@@ -1,11 +1,15 @@
 package com.example.myapp;
 
+import java.lang.reflect.Field;
+
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +30,19 @@ public class MyActivity1 extends Activity {
 		//String base64Str = clipboard.getText().toString();
 		String html="<font color='red'>I love Android.</font><br>";
 		html+="<font color='#0000FF'><big><i>I love Android.</i></big></font><br>";
+		html+="<img src='ic_my'/>";
 		
-		CharSequence cs = Html.fromHtml(html);
+		CharSequence cs = Html.fromHtml(html, new ImageGetter()
+		{
+
+			@Override
+			public Drawable getDrawable(String arg0) {
+				Drawable drawable = getResources().getDrawable(getResourceId(arg0));
+				drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
+				return drawable;
+			}
+			
+		}, null);
 		TextView tv = (TextView) this.findViewById(R.id.textView1);
 		tv.setText(cs);
 		//tv.setText(base64Str);
@@ -41,6 +56,17 @@ public class MyActivity1 extends Activity {
 		*/
 	}
 	
+	protected int getResourceId(String arg0) {
+		try {
+			Field field = R.drawable.class.getField(arg0);
+			return Integer.parseInt(field.get(null).toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	public void onClick_Btn (View view)
 	{
 		Intent intent = new Intent ();
