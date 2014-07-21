@@ -20,4 +20,12 @@
         android:text="open act2" android:onClick="onClick_OpenAct2"/>
     <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:text="open act3" android:onClick="onClick_OpenAct3"/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_test"
+        android:text="test" />
+"
 </LinearLayout>

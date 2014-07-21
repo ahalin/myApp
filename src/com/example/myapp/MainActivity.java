@@ -13,6 +13,7 @@ import android.app.Fragment;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
@@ -23,6 +24,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.Toast;
 import android.os.Build;
 
 public class MainActivity extends Activity {
@@ -67,6 +70,14 @@ public class MainActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 					*/
+		}
+		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE))
+		{
+			Toast.makeText(this, "no ble", Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+			Toast.makeText(this, "BLE", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -140,6 +151,21 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent ("myact2");
 		intent.addCategory("mycat");
 		startActivity (intent);
+	}
+	
+	private int value = 1;
+	public void onClick_test (View v)
+	{
+		Button btn = (Button)findViewById(R.id.button1);
+		Log.d(TAG,"click test");
+		//Button btn = (Button)v;
+		if (value == 1 && btn.getWidth() == getWindowManager().getDefaultDisplay().getWidth())
+			value = -1;
+		else if (value == -1 && btn.getWidth()<100) {
+			value =1;
+		}
+		btn.setWidth(btn.getWidth()+(int)(btn.getWidth()*0.1)*value);
+		btn.setHeight(btn.getHeight()+(int)(btn.getWidth()*0.1)*value);
 	}
 
 	@Override

@@ -6,10 +6,19 @@ import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.TextPaint;
 import android.text.Html.ImageGetter;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.CharacterStyle;
+import android.text.style.ClickableSpan;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +34,7 @@ public class MyActivity1 extends Activity {
 		Log.d(TAG, "onCreate");
 		
 		setContentView(R.layout.my_act1);
+		/*
 		//ClipboardManager clipboard = (ClipboardManager) getSystemService (Context.CLIPBOARD_SERVICE);
 		//String base64Str = clipboard.getPrimaryClipDescription().toString();
 		//String base64Str = clipboard.getText().toString();
@@ -47,13 +57,53 @@ public class MyActivity1 extends Activity {
 		tv.setText(cs);
 		//tv.setText(base64Str);
 		
-		/*
+		/ *
 		EditText edText = new EditText (this);
 		edText.setText("123");
 		ViewGroup vgrp = (ViewGroup) this.getLayoutInflater().inflate(R.layout.my_act1, null);
 		vgrp.addView(edText);
 		setContentView (vgrp);
+		* /
+		
 		*/
+		TextView textView1 = (TextView) findViewById(R.id.textView1);
+		TextView textView2 = (TextView) findViewById(R.id.textView2);
+		String text1 = "show act1";
+		String text2 = "show act2";
+		String text = "<¨S¦³­I´º><¶À¦â­I´º>";
+		SpannableString spannableString1 = new SpannableString(text1);
+		SpannableString spannableString2 = new SpannableString(text2);
+		SpannableString spannableString3 = new SpannableString(text);
+		spannableString1.setSpan(new ClickableSpan() {
+			
+			@Override
+			public void onClick(View widget) {
+				startActivity(new Intent(MyActivity1.this, MyActivity2.class));
+			}
+		},	0, text1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannableString2.setSpan(new ClickableSpan() {
+			
+			@Override
+			public void onClick(View widget) {
+				startActivity(new Intent(MyActivity1.this, MyActivity3.class));
+			}
+		},	0, text2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		
+		spannableString3.setSpan(new BackgroundColorSpan(Color.YELLOW), 6, 12, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannableString3.setSpan(new CharacterStyle() {
+			
+			@Override
+			public void updateDrawState(TextPaint tp) {
+				tp.bgColor = Color.RED;
+				tp.setColor(Color.BLUE);
+			}
+		}, 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		
+		textView1.setText(spannableString1);
+		textView2.setText(spannableString2);
+		textView2.setText(spannableString3);
+		textView1.setMovementMethod(LinkMovementMethod.getInstance());
+		textView2.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 	protected int getResourceId(String arg0) {
