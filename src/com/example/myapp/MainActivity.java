@@ -9,9 +9,12 @@ import com.example.myapp.CircleCanvas.CircleInfo;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.AlertDialog.Builder;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -156,6 +159,7 @@ public class MainActivity extends Activity {
 	private int value = 1;
 	public void onClick_test (View v)
 	{
+		/*
 		Button btn = (Button)findViewById(R.id.button1);
 		Log.d(TAG,"click test");
 		//Button btn = (Button)v;
@@ -166,6 +170,22 @@ public class MainActivity extends Activity {
 		}
 		btn.setWidth(btn.getWidth()+(int)(btn.getWidth()*0.1)*value);
 		btn.setHeight(btn.getHeight()+(int)(btn.getWidth()*0.1)*value);
+		*/
+		new AlertDialog.Builder(this).setIcon(R.drawable.ic_my).setTitle("if download").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//new AlertDialog.Builder(MainActivity.this).setMessage("download ok").create().show();
+				Builder builder = new AlertDialog.Builder(MainActivity.this);
+				builder.setMessage("okokok").show();
+			}
+		}).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				new AlertDialog.Builder(MainActivity.this).setMessage("download canceled").create().show();
+			}
+		}).create().show();
 	}
 
 	@Override
